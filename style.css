@@ -11,6 +11,14 @@ html {
     padding: 0;
 }
 
+button,
+input,
+select,
+textarea {
+    font-family: inherit;
+    font-size: 100%;
+}
+
 /* || GENERAL */
 :root {
     --strong-cyan: hsl(172, 67%, 45%);
@@ -19,6 +27,7 @@ html {
     --grayish-cyan: hsl(184, 14%, 56%);
     --light-grayish-cyan: hsl(185, 41%, 84%);
     --very-light-grayish-cyan: hsl(189, 41%, 97%);
+    --light-cyan: hsl(172.6, 61.3%, 76.7%);
     --white: hsl(0, 0%, 100%);
 }
 
@@ -47,6 +56,64 @@ body {
     display: flex;
     gap: 2rem;
     flex-direction: column;
+}
+
+/* || USER INFO SECTION */
+.user-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.user-info__input {
+    height: 3rem;
+    width: 100%;
+    font-size: 1.5rem;
+    background-color: var(--very-light-grayish-cyan);
+    color: var(--very-dark-cyan);
+    border: none;
+    text-align: right;
+    padding: 0 1rem 0 0;
+    border-radius: 0.313rem;
+    box-sizing: border-box;
+}
+
+.user-info__input:focus {
+    border: 0.125rem solid var(--strong-cyan);
+    padding: 0 0.875rem 0 0; /* subtract border size form padding */
+}
+
+.tip-btn {
+    background-color: var(--very-dark-cyan);
+    color: var(--white);
+    border: none;
+    border-radius: 0.313rem;
+    font-size: 1.5rem;
+    padding: 0.375rem 0 0.375rem 0;
+    cursor: pointer;
+}
+
+.tip-btn:hover {
+    background-color: var(--light-cyan);
+    color: var(--very-dark-cyan);
+}
+
+.user-info__label--bill,
+.user-info__label--people {
+    display: inline-block;
+    margin: 0 0 0.375rem 0;
+}
+
+.user-info__label--tip {
+    display: inline-block;
+    margin: 0 0 1rem 0;
+}
+
+.tip-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 1rem;
 }
 
 /*  || RESULTS SECTION */
@@ -96,4 +163,8 @@ body {
     min-width: 17.5rem;
     padding: 0.563rem 0 0.563rem 0;
     cursor: pointer;
+}
+
+.btn__reset:hover {
+    background-color: var(--light-cyan);
 }
