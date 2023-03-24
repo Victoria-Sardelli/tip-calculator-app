@@ -30,26 +30,33 @@
 
         <main class="main">
             <!-- inputs to collect user data about bill, tip %, and # of people-->
-            <form class="user-info">
+            <section class="user-info">
                 <div>
                     <label class="user-info__label--bill" for="bill"
                         >Bill</label
                     >
-                    <input
-                        class="user-info__input"
-                        type="text"
-                        id="bill"
-                        placeholder="0"
-                    />
+                    <div class="user-info__input-container">
+                        <img
+                            class="icon"
+                            src="images/icon-dollar.svg"
+                            alt="dollar icon"
+                        />
+                        <input
+                            class="user-info__input"
+                            type="text"
+                            id="bill"
+                            placeholder="0"
+                        />
+                    </div>
                 </div>
                 <div>
                     <label class="user-info__label--tip">Select Tip %</label>
                     <div class="tip-container">
-                        <button class="tip-btn">5%</button>
-                        <button class="tip-btn">10%</button>
-                        <button class="tip-btn">15%</button>
-                        <button class="tip-btn">25%</button>
-                        <button class="tip-btn">50%</button>
+                        <button type="button" class="tip-btn">5%</button>
+                        <button type="button" class="tip-btn">10%</button>
+                        <button type="button" class="tip-btn">15%</button>
+                        <button type="button" class="tip-btn">25%</button>
+                        <button type="button" class="tip-btn">50%</button>
                         <input
                             class="user-info__input"
                             type="text"
@@ -61,13 +68,20 @@
                     <label class="user-info__label--people"
                         >Number of People</label
                     >
-                    <input
-                        class="user-info__input"
-                        type="text"
-                        placeholder="0"
-                    />
+                    <div class="user-info__input-container">
+                        <img
+                            class="icon"
+                            src="images/icon-person.svg"
+                            alt="person icon"
+                        />
+                        <input
+                            class="user-info__input"
+                            type="text"
+                            placeholder="0"
+                        />
+                    </div>
                 </div>
-            </form>
+            </section>
             <!-- display calculated tip and total, as well as reset button-->
             <section class="results">
                 <div class="calculated-data">

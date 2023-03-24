@@ -83,6 +83,18 @@ body {
     padding: 0 0.875rem 0 0; /* subtract border size form padding */
 }
 
+.user-info__input-container {
+    position: relative;
+}
+
+.icon {
+    position: absolute;
+    left: 1rem;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+}
+
 .tip-btn {
     background-color: var(--very-dark-cyan);
     color: var(--white);
