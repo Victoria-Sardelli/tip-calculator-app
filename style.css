@@ -56,7 +56,7 @@ body {
     display: flex;
     gap: 2rem;
     flex-direction: column;
-    max-width: 100vw;
+    width: 100vw;
 }
 
 /* || USER INFO SECTION */
@@ -182,17 +182,31 @@ body {
     background-color: var(--light-cyan);
 }
 
+/* TABLET */
+@media (min-width: 768px) {
+    .main {
+        flex: 0;
+        width: 60vw;
+        border-radius: 1.563rem;
+    }
+}
+
 /* DESKTOP */
 @media (min-width: 1440px) {
     /* || GENERAL */
+    body {
+        justify-content: center;
+    }
+
     .logo {
-        margin: 10.188rem 0 5.5rem 0;
+        margin: 0 0 5.5rem 0;
     }
 
     .main {
         flex: 0;
         flex-direction: row;
         border-radius: 1.563rem;
+        width: auto;
     }
 
     /* || USER INFO SECTION */
@@ -224,5 +238,16 @@ body {
 
     .btn__reset {
         min-width: 20.813rem;
+    }
+}
+
+@media (min-width: 1440px) and (min-height: 1024px) {
+    /* || GENERAL */
+    .logo {
+        margin: 10.188rem 0 5.5rem 0;
+    }
+
+    body {
+        justify-content: flex-start;
     }
 }
