@@ -116,6 +116,11 @@ body {
     color: var(--very-dark-cyan);
 }
 
+.tip-btn--selected {
+    background-color: var(--strong-cyan);
+    color: var(--very-dark-cyan);
+}
+
 .bill-label,
 .people-label {
     display: inline-block;
