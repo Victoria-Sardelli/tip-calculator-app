@@ -7,65 +7,61 @@ const tipBtns = document.querySelectorAll(".tip-btn");
 const tipPrice = document.getElementById("tip-price");
 const totalPrice = document.getElementById("total-price");
 const resetBtn = document.querySelector(".reset-btn");
+const peopleWarning = document.getElementById("people-warning");
+const billWarning = document.getElementById("bill-warning");
 
 const tipBtnSelectedClass = "tip-btn--selected";
 
 let currentTipPercentage, currentTotal, currentPeople, currentBill;
 
-// Remove selected class from previously-selected tip buttonm if one exists
+// Remove selected class from previously-selected tip button, if one exists
 const unselectPrevTipBtn = function () {
     const prevSelection = document.querySelector(`.${tipBtnSelectedClass}`);
     if (prevSelection) prevSelection.classList.remove(tipBtnSelectedClass);
 };
 
-// Unselect previous tip button selection and set new selection
+// Update styles for previous and current selections, and update state variable and results
 const selectTipBtn = function (e) {
     unselectPrevTipBtn();
     e.target.classList.add(tipBtnSelectedClass);
 };
 
-// Unselect previous tip button selection
+// Update styles for previous selection, and update state variable and results
 const selectTipInput = function (e) {
     unselectPrevTipBtn();
+    updateBasedOnInputValidity({
+        input: tipInput,
+        stateVa: currentTipPercentage,
+    });
 };
 
-// Update number of people based on user input
-const updatePeople = function (e) {
-    const newValue = Number(e.target.value);
-    if (!newValue || !Number.isInteger(newValue)) {
-        console.log("Not a valid input!");
-        return;
-    }
-    currentPeople = newValue;
-};
-
-const isValidCurrencyString = function (value) {
-    // throw error if param is not a string
-    if (typeof value !== "string") {
-        throw new Error("Parameter is not a string.");
-    }
-
-    // Return false if given falsy value
-    if (!value) return false;
-
-    // Return false if string contains characters besides numbers, commas, and periods
-    // There must be only one comma or period, representing decimal in number
-    const pattern = new RegExp("^[0-9]+[\\.,]?[0-9]*$");
-    if (!pattern.test(value)) return false;
-
-    return true;
-};
-
-// Update value of bill based on user input
-const updateBill = function (e) {
-    const newValue = e.target.value;
-    try {
-        isValidCurrencyString(newValue);
-    } catch (error) {
-        console.error(error);
+/* 
+Updates visibility of warning messages, value of state variables, and displayed results
+based on validity of the user input as determined through pattern matches in HTML
+*/
+const updateBasedOnInputValidity = function ({
+    input,
+    warningElem = null,
+    stateVar,
+}) {
+    if (!input.checkValidity()) {
+        // if invalid, show warning if one exists
+        if (warningElem) warningElem.classList.remove("hidden");
+        // update relevant state variable to initial state
+        stateVar = 0;
+        // display result prices as to indicate no value
+        tipPrice.textContent = "-";
+        totalPrice.textContent = "-";
+    } else {
+        // if valid, hide warning if one exists
+        if (warningElem) warningElem.classList.add("hidden");
+        // display updated result prices
+        tipPrice.textContent = "$0.00";
+        totalPrice.textContent = "$0.00";
     }
 };
 
+// Initializes starting values and state
 const init = function () {
     currentTipPercentage = 0;
     currentTotal = 0;
@@ -80,17 +76,26 @@ const init = function () {
     unselectPrevTipBtn();
 };
 
-// Initialize starting values and state
 init();
 
-// Add event handlers
 for (const tipBtn of tipBtns) {
     tipBtn.addEventListener("click", selectTipBtn);
 }
-
 tipInput.addEventListener("focus", selectTipInput);
 tipInput.addEventListener("input", selectTipInput);
 
-peopleInput.addEventListener("input", updatePeople);
+peopleInput.addEventListener("input", () => {
+    updateBasedOnInputValidity({
+        input: peopleInput,
+        warningElem: peopleWarning,
+        stateVar: currentPeople,
+    });
+});
 
-billInput.addEventListener("input", updateBill);
+billInput.addEventListener("input", () => {
+    updateBasedOnInputValidity({
+        input: billInput,
+        warningElem: billWarning,
+        stateVar: currentBill,
+    });
+});

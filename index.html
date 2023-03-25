@@ -32,8 +32,13 @@
             <!-- inputs to collect user data about bill, tip %, and # of people-->
             <section class="user-info">
                 <div>
-                    <label class="bill-label" for="bill">Bill</label>
-                    <div class="user-info__container">
+                    <div class="user-info__input-title-text">
+                        <label class="bill-label" for="bill">Bill</label>
+                        <span id="bill-warning" class="warning hidden"
+                            >Invalid monetary amount</span
+                        >
+                    </div>
+                    <div class="user-info__input-container">
                         <img
                             class="icon"
                             src="images/icon-dollar.svg"
@@ -44,6 +49,7 @@
                             class="user-info__input"
                             type="text"
                             placeholder="0"
+                            pattern="^(((?!(0{2,}(\.))|(0{1,},))\d{1,3}(,?\d{3})*(\.\d{2})?)|((?!(0{2,},)|(0{1,}(\.)))\d{1,3}(\.?\d{3})*(,\d{2})?))$"
                         />
                     </div>
                 </div>
@@ -91,15 +97,21 @@
                                 class="user-info__input"
                                 type="text"
                                 placeholder="Custom"
+                                pattern="^(((?!(0{2,}(\.))|(0{1,},))\d{1,3}(,?\d{3})*(\.\d{1,})?)|((?!(0{2,},)|(0{1,}(\.)))\d{1,3}(\.?\d{3})*(,\d{1,})?)(%?))$"
                             />
                         </div>
                     </fieldset>
                 </div>
                 <div>
-                    <label class="people-label" for="people"
-                        >Number of People</label
-                    >
-                    <div class="user-info__container">
+                    <div class="user-info__input-title-text">
+                        <label class="people-label" for="people"
+                            >Number of People</label
+                        >
+                        <span id="people-warning" class="warning hidden"
+                            >Invalid number</span
+                        >
+                    </div>
+                    <div class="user-info__input-container">
                         <img
                             class="icon"
                             src="images/icon-person.svg"
@@ -110,6 +122,7 @@
                             class="user-info__input"
                             type="text"
                             placeholder="0"
+                            pattern="[1-9][0-9]*"
                         />
                     </div>
                 </div>

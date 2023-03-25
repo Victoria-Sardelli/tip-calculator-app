@@ -80,19 +80,32 @@ body {
     border-radius: 0.313rem;
 }
 
-.user-info__input--error {
-    outline: none;
-    border: 0.125rem solid var(--orange);
-    padding: 0 0.875rem 0 0; /* subtract border size from padding */
-}
-
-.user-info__input:focus:not(.user-info__input--error) {
+.user-info__input:focus:not(.user-info__input:invalid) {
     outline: none;
     border: 0.125rem solid var(--strong-cyan);
     padding: 0 0.875rem 0 0; /* subtract border size from padding */
 }
 
-.user-info__container {
+.user-info__input:invalid {
+    outline: none;
+    border: 0.125rem solid var(--orange);
+    padding: 0 0.875rem 0 0; /* subtract border size from padding */
+}
+
+.warning {
+    color: var(--orange);
+}
+
+.hidden {
+    display: none;
+}
+
+.user-info__input-title-text {
+    display: flex;
+    justify-content: space-between;
+}
+
+.user-info__input-container {
     position: relative;
 }
 
