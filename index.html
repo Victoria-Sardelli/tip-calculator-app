@@ -40,9 +40,9 @@
                             alt="dollar icon"
                         />
                         <input
+                            id="bill"
                             class="user-info__input"
                             type="text"
-                            id="bill"
                             placeholder="0"
                         />
                     </div>
@@ -51,11 +51,41 @@
                     <fieldset class="tip-fieldset">
                         <legend class="tip-legend">Select Tip %</legend>
                         <div class="tip-container">
-                            <button type="button" class="tip-btn">5%</button>
-                            <button type="button" class="tip-btn">10%</button>
-                            <button type="button" class="tip-btn">15%</button>
-                            <button type="button" class="tip-btn">25%</button>
-                            <button type="button" class="tip-btn">50%</button>
+                            <button
+                                type="button"
+                                class="tip-btn"
+                                data-tip-percentage="5"
+                            >
+                                5%
+                            </button>
+                            <button
+                                type="button"
+                                class="tip-btn"
+                                data-tip-percentage="10"
+                            >
+                                10%
+                            </button>
+                            <button
+                                type="button"
+                                class="tip-btn"
+                                data-tip-percentage="15"
+                            >
+                                15%
+                            </button>
+                            <button
+                                type="button"
+                                class="tip-btn"
+                                data-tip-percentage="25"
+                            >
+                                25%
+                            </button>
+                            <button
+                                type="button"
+                                class="tip-btn"
+                                data-tip-percentage="50"
+                            >
+                                50%
+                            </button>
                             <input
                                 class="user-info__input"
                                 type="text"
@@ -65,7 +95,9 @@
                     </fieldset>
                 </div>
                 <div>
-                    <label class="people-label">Number of People</label>
+                    <label class="people-label" for="people"
+                        >Number of People</label
+                    >
                     <div class="user-info__container">
                         <img
                             class="icon"
@@ -73,6 +105,7 @@
                             alt="person icon"
                         />
                         <input
+                            id="people"
                             class="user-info__input"
                             type="text"
                             placeholder="0"
@@ -88,14 +121,14 @@
                             <p class="data-item__title">Tip Amount</p>
                             <p class="data-item__subtitle">/ person</p>
                         </div>
-                        <p class="data-item__price">$0.00</p>
+                        <p id="tip-price" class="data-item__price">$0.00</p>
                     </div>
                     <div class="data-item">
                         <div>
                             <p class="data-item__title">Total</p>
                             <p class="data-item__subtitle">/ person</p>
                         </div>
-                        <p class="data-item__price">$0.00</p>
+                        <p id="total-price" class="data-item__price">$0.00</p>
                     </div>
                 </div>
 
