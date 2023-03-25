@@ -177,7 +177,7 @@ body {
     font-size: 0.813rem;
 }
 
-.btn__reset {
+.reset-btn {
     background-color: var(--strong-cyan);
     color: var(--very-dark-cyan);
     font-size: 1.25rem;
@@ -188,11 +188,11 @@ body {
     cursor: pointer;
 }
 
-.btn__reset:hover {
+.reset-btn:hover {
     background-color: var(--light-cyan);
 }
 
-.btn__reset:disabled {
+.reset-btn:disabled {
     background-color: var(--dark-cyan);
     cursor: default;
 }
@@ -251,7 +251,7 @@ body {
         font-size: 3rem;
     }
 
-    .btn__reset {
+    .reset-btn {
         min-width: 20.813rem;
     }
 }
