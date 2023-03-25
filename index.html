@@ -32,10 +32,8 @@
             <!-- inputs to collect user data about bill, tip %, and # of people-->
             <section class="user-info">
                 <div>
-                    <label class="user-info__label--bill" for="bill"
-                        >Bill</label
-                    >
-                    <div class="user-info__input-container">
+                    <label class="bill-label" for="bill">Bill</label>
+                    <div class="user-info__container">
                         <img
                             class="icon"
                             src="images/icon-dollar.svg"
@@ -50,25 +48,25 @@
                     </div>
                 </div>
                 <div>
-                    <label class="user-info__label--tip">Select Tip %</label>
-                    <div class="tip-container">
-                        <button type="button" class="tip-btn">5%</button>
-                        <button type="button" class="tip-btn">10%</button>
-                        <button type="button" class="tip-btn">15%</button>
-                        <button type="button" class="tip-btn">25%</button>
-                        <button type="button" class="tip-btn">50%</button>
-                        <input
-                            class="user-info__input"
-                            type="text"
-                            placeholder="Custom"
-                        />
-                    </div>
+                    <fieldset class="tip-fieldset">
+                        <legend class="tip-legend">Select Tip %</legend>
+                        <div class="tip-container">
+                            <button type="button" class="tip-btn">5%</button>
+                            <button type="button" class="tip-btn">10%</button>
+                            <button type="button" class="tip-btn">15%</button>
+                            <button type="button" class="tip-btn">25%</button>
+                            <button type="button" class="tip-btn">50%</button>
+                            <input
+                                class="user-info__input"
+                                type="text"
+                                placeholder="Custom"
+                            />
+                        </div>
+                    </fieldset>
                 </div>
                 <div>
-                    <label class="user-info__label--people"
-                        >Number of People</label
-                    >
-                    <div class="user-info__input-container">
+                    <label class="people-label">Number of People</label>
+                    <div class="user-info__container">
                         <img
                             class="icon"
                             src="images/icon-person.svg"

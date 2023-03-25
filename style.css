@@ -84,7 +84,7 @@ body {
     padding: 0 0.875rem 0 0; /* subtract border size from padding */
 }
 
-.user-info__input-container {
+.user-info__container {
     position: relative;
 }
 
@@ -94,6 +94,10 @@ body {
     top: 0;
     bottom: 0;
     margin: auto;
+}
+
+.tip-fieldset {
+    border: none;
 }
 
 .tip-btn {
@@ -111,13 +115,13 @@ body {
     color: var(--very-dark-cyan);
 }
 
-.user-info__label--bill,
-.user-info__label--people {
+.bill-label,
+.people-label {
     display: inline-block;
     margin: 0 0 0.375rem 0;
 }
 
-.user-info__label--tip {
+.tip-legend {
     display: inline-block;
     margin: 0 0 1rem 0;
 }
