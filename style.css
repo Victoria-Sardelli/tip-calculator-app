@@ -30,6 +30,7 @@ textarea {
     --very-light-grayish-cyan: hsl(189, 41%, 97%);
     --light-cyan: hsl(172.6, 61.3%, 76.7%);
     --white: hsl(0, 0%, 100%);
+    --orange: hsl(12.6, 70.4%, 60.2%);
 }
 
 body {
@@ -79,7 +80,13 @@ body {
     border-radius: 0.313rem;
 }
 
-.user-info__input:focus {
+.user-info__input--error {
+    outline: none;
+    border: 0.125rem solid var(--orange);
+    padding: 0 0.875rem 0 0; /* subtract border size from padding */
+}
+
+.user-info__input:focus:not(.user-info__input--error) {
     outline: none;
     border: 0.125rem solid var(--strong-cyan);
     padding: 0 0.875rem 0 0; /* subtract border size from padding */
@@ -111,11 +118,13 @@ body {
     cursor: pointer;
 }
 
-.tip-btn:hover {
+.tip-btn:hover:not(.tip-btn--selected),
+.tip-btn:focus:not(.tip-btn--selected) {
     background-color: var(--light-cyan);
     color: var(--very-dark-cyan);
 }
 
+.tip-btn:active,
 .tip-btn--selected {
     background-color: var(--strong-cyan);
     color: var(--very-dark-cyan);
