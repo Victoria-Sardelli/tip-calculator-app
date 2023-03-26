@@ -12,40 +12,64 @@ const billWarning = document.getElementById("bill-warning");
 
 const tipBtnSelectedClass = "tip-btn--selected";
 
+const validTipBtnPercentages = [5, 10, 15, 25, 50];
+
+// Keeps track of values input by user
 const currentState = {
     tipPercentage: 0,
-    total: 0,
-    people: 0,
     bill: 0,
+    people: 0,
 };
 
-// Remove selected class from previously-selected tip button, if one exists
+// Removes styles from previously-selected tip button, if one exists
 const unselectPrevTipBtn = function () {
     const prevSelection = document.querySelector(`.${tipBtnSelectedClass}`);
     if (prevSelection) prevSelection.classList.remove(tipBtnSelectedClass);
 };
 
-// Update styles for previous and current selections, and update state variable and results
-const selectTipBtn = function (e) {
-    unselectPrevTipBtn();
-    // add styles to selected button
-    e.target.classList.add(tipBtnSelectedClass);
-    // update state var for tip percentage
-    currentState.tipPercentage = e.target.dataset.tipPercentage;
+// Returns true if current state contains all the necessary values for calculating Tip Amount and Total
+const canCalculateResults = function () {
+    return currentState.bill && currentState.people; // must be non-zero
 };
 
-// Update styles for previous selection, and update state variable and results
-const selectTipInput = function (e) {
-    unselectPrevTipBtn();
-    updateBasedOnInputValidity({
-        input: tipInput,
-        stateVar: "tipPercentage",
-    });
+// Calculates tip (per person) and total (per person) based on stored user input
+const calculateResults = function () {
+    // calculate monetary values using integer cent values to avoid issues with floating point math
+    const billInCents = currentState.bill * 100;
+    const tipInCents =
+        Math.round(billInCents * currentState.tipPercentage) / 100;
+    const totalInCents = Math.round(billInCents + tipInCents);
+    // divide cent values by 100 to convert to dollars
+    return {
+        tipPerPerson: Math.round(tipInCents / currentState.people) / 100,
+        totalPerPerson: Math.round(totalInCents / currentState.people) / 100,
+    };
+};
+
+// Replaces displayed Tip Amount and Total results with text that signifies "no value", and disables reset button
+const removeDisplayedResults = function () {
+    tipPrice.textContent = "-";
+    totalPrice.textContent = "-";
+    resetBtn.disabled = true;
 };
 
 /* 
-Updates visibility of warning messages, value of state variables, and displayed results
-based on validity of the user input as determined through pattern matches in HTML
+Calculates and displays values for Tip Amount and Total on UI. 
+If calculation conditions are not met, display result prices to indicate no value
+*/
+const updateDisplayedResults = function () {
+    if (canCalculateResults()) {
+        const { tipPerPerson, totalPerPerson } = calculateResults();
+        tipPrice.textContent = `$${tipPerPerson}`;
+        totalPrice.textContent = `$${totalPerPerson}`;
+    } else {
+        removeDisplayedResults();
+    }
+};
+
+/* 
+Updates warning message visibility, state variables, and displayed results
+based on validity of user input (as determined by pattern matches in HTML)
 */
 const updateBasedOnInputValidity = function ({
     input,
@@ -54,29 +78,64 @@ const updateBasedOnInputValidity = function ({
 }) {
     // ensure reset button is enabled
     resetBtn.disabled = false;
+
     if (!input.checkValidity()) {
         // if invalid, show warning if one exists
         if (warningElem) warningElem.classList.remove("hidden");
-        // update relevant state variable to initial state
+        // reset relevant state variable to initial state
         currentState[stateVar] = 0;
-        // display result prices as to indicate no value
-        tipPrice.textContent = "-";
-        totalPrice.textContent = "-";
+        // display result prices to indicate no value
+        removeDisplayedResults();
     } else {
         // if valid, hide warning if one exists
         if (warningElem) warningElem.classList.add("hidden");
-        //update relevant state variable to user-defined state
-        currentState[stateVar] = input.value || 0;
-        // display updated result prices
-        tipPrice.textContent = "$0.00";
-        totalPrice.textContent = "$0.00";
+        //update relevant state variable based on user input
+        const formattedUserInput = removeCommas(input.value);
+        console.log(formattedUserInput);
+        currentState[stateVar] = Number(formattedUserInput) || 0;
+        // calculate and display new tip and total on ui
+        updateDisplayedResults();
     }
+};
+
+/* 
+Formats user input string so that it can be parsed as a number 
+regardless if the string uses commas to denote decimals or express thousands
+*/
+const removeCommas = function (userInput) {
+    const thousandsRegex = /,(\d{3})/g;
+    const decimalRegex = /,(\d{2})/g;
+    return userInput.replace(thousandsRegex, "$1").replace(decimalRegex, ".$1");
+};
+// Updates tip button styles based on user selection, clears tip input, and updates state variable and calculated results
+const selectTipBtn = function (e) {
+    // remove styles from previously-selected button and add to newly-selected button
+    unselectPrevTipBtn();
+    e.target.classList.add(tipBtnSelectedClass);
+    // clear tip input
+    tipInput.value = "";
+    // update state variable with new tip percentage if valid. otherwise, throw error
+    currentState.tipPercentage = Number(e.target.dataset.tipPercentage);
+    if (!validTipBtnPercentages.includes(currentState.tipPercentage))
+        throw new Error(
+            `Invalid tip percentage: ${currentState.tipPercentage}`
+        );
+    // calculate and display new tip and total on ui
+    updateDisplayedResults();
+};
+
+// Removes styles from previously-selected tip button if one exists, and updates state variable and calculated results
+const selectTipInput = function (e) {
+    unselectPrevTipBtn();
+    updateBasedOnInputValidity({
+        input: tipInput,
+        stateVar: "tipPercentage",
+    });
 };
 
 // Initializes starting values and state
 const init = function () {
     currentState.tipPercentage = 0;
-    currentState.total = 0;
     currentState.people = 0;
     currentState.bill = 0;
     resetBtn.disabled = true;
@@ -91,7 +150,13 @@ const init = function () {
 init();
 
 for (const tipBtn of tipBtns) {
-    tipBtn.addEventListener("click", selectTipBtn);
+    tipBtn.addEventListener("click", (e) => {
+        try {
+            selectTipBtn(e);
+        } catch (error) {
+            console.error(error);
+        }
+    });
 }
 tipInput.addEventListener("focus", selectTipInput);
 tipInput.addEventListener("input", selectTipInput);
