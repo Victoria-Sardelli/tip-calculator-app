@@ -60,8 +60,8 @@ If calculation conditions are not met, display result prices to indicate no valu
 const updateDisplayedResults = function () {
     if (canCalculateResults()) {
         const { tipPerPerson, totalPerPerson } = calculateResults();
-        tipPrice.textContent = `$${tipPerPerson}`;
-        totalPrice.textContent = `$${totalPerPerson}`;
+        tipPrice.textContent = `$${tipPerPerson.toFixed(2)}`;
+        totalPrice.textContent = `$${totalPerPerson.toFixed(2)}`;
     } else {
         removeDisplayedResults();
     }
