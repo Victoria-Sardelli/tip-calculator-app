@@ -91,7 +91,6 @@ const updateBasedOnInputValidity = function ({
         if (warningElem) warningElem.classList.add("hidden");
         //update relevant state variable based on user input
         const formattedUserInput = removeCommas(input.value);
-        console.log(formattedUserInput);
         currentState[stateVar] = Number(formattedUserInput) || 0;
         // calculate and display new tip and total on ui
         updateDisplayedResults();
