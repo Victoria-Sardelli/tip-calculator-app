@@ -71,7 +71,6 @@ const updateBasedOnInputValidity = function ({
         tipPrice.textContent = "$0.00";
         totalPrice.textContent = "$0.00";
     }
-    console.log(currentState);
 };
 
 // Initializes starting values and state
@@ -103,7 +102,6 @@ peopleInput.addEventListener("input", () => {
         warningElem: peopleWarning,
         stateVar: "people",
     });
-    console.log("input");
 });
 
 billInput.addEventListener("input", () => {
