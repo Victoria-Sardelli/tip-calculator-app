@@ -12,7 +12,12 @@ const billWarning = document.getElementById("bill-warning");
 
 const tipBtnSelectedClass = "tip-btn--selected";
 
-let currentTipPercentage, currentTotal, currentPeople, currentBill;
+const currentState = {
+    tipPercentage: 0,
+    total: 0,
+    people: 0,
+    bill: 0,
+};
 
 // Remove selected class from previously-selected tip button, if one exists
 const unselectPrevTipBtn = function () {
@@ -23,7 +28,10 @@ const unselectPrevTipBtn = function () {
 // Update styles for previous and current selections, and update state variable and results
 const selectTipBtn = function (e) {
     unselectPrevTipBtn();
+    // add styles to selected button
     e.target.classList.add(tipBtnSelectedClass);
+    // update state var for tip percentage
+    currentState.tipPercentage = e.target.dataset.tipPercentage;
 };
 
 // Update styles for previous selection, and update state variable and results
@@ -31,7 +39,7 @@ const selectTipInput = function (e) {
     unselectPrevTipBtn();
     updateBasedOnInputValidity({
         input: tipInput,
-        stateVa: currentTipPercentage,
+        stateVar: "tipPercentage",
     });
 };
 
@@ -44,29 +52,34 @@ const updateBasedOnInputValidity = function ({
     warningElem = null,
     stateVar,
 }) {
+    // ensure reset button is enabled
+    resetBtn.disabled = false;
     if (!input.checkValidity()) {
         // if invalid, show warning if one exists
         if (warningElem) warningElem.classList.remove("hidden");
         // update relevant state variable to initial state
-        stateVar = 0;
+        currentState[stateVar] = 0;
         // display result prices as to indicate no value
         tipPrice.textContent = "-";
         totalPrice.textContent = "-";
     } else {
         // if valid, hide warning if one exists
         if (warningElem) warningElem.classList.add("hidden");
+        //update relevant state variable to user-defined state
+        currentState[stateVar] = input.value || 0;
         // display updated result prices
         tipPrice.textContent = "$0.00";
         totalPrice.textContent = "$0.00";
     }
+    console.log(currentState);
 };
 
 // Initializes starting values and state
 const init = function () {
-    currentTipPercentage = 0;
-    currentTotal = 0;
-    currentPeople = 0;
-    currentBill = 0;
+    currentState.tipPercentage = 0;
+    currentState.total = 0;
+    currentState.people = 0;
+    currentState.bill = 0;
     resetBtn.disabled = true;
     billInput.value = "";
     tipInput.value = "";
@@ -88,14 +101,17 @@ peopleInput.addEventListener("input", () => {
     updateBasedOnInputValidity({
         input: peopleInput,
         warningElem: peopleWarning,
-        stateVar: currentPeople,
+        stateVar: "people",
     });
+    console.log("input");
 });
 
 billInput.addEventListener("input", () => {
     updateBasedOnInputValidity({
         input: billInput,
         warningElem: billWarning,
-        stateVar: currentBill,
+        stateVar: "bill",
     });
 });
+
+resetBtn.addEventListener("click", init);
