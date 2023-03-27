@@ -13,7 +13,7 @@
         />
 
         <link rel="stylesheet" href="style.css" />
-        <script type="text/javascript" src="script.js" defer></script>
+        <script src="script.js" defer></script>
 
         <!-- fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -35,7 +35,7 @@
             <section class="user-info">
                 <div>
                     <div class="user-info__input-title-text">
-                        <h1 class="top-of-main-content">
+                        <h1 class="heading">
                             <label class="bill-label" for="bill">Bill</label>
                         </h1>
                         <span id="bill-warning" class="warning hidden"
@@ -59,7 +59,9 @@
                 </div>
                 <div>
                     <fieldset class="tip-fieldset">
-                        <legend class="tip-legend">Select Tip %</legend>
+                        <legend class="tip-legend">
+                            <h2 class="heading">Select Tip %</h2>
+                        </legend>
                         <div class="tip-container">
                             <button
                                 type="button"
@@ -108,9 +110,11 @@
                 </div>
                 <div>
                     <div class="user-info__input-title-text">
-                        <label class="people-label" for="people"
-                            >Number of People</label
-                        >
+                        <h2 class="heading">
+                            <label class="people-label" for="people"
+                                >Number of People</label
+                            >
+                        </h2>
                         <span id="people-warning" class="warning hidden"
                             >Invalid number</span
                         >
@@ -135,17 +139,17 @@
             <section class="results">
                 <div class="calculated-data">
                     <div class="data-item">
-                        <div>
-                            <p class="data-item__title">Tip Amount</p>
-                            <p class="data-item__subtitle">/ person</p>
-                        </div>
+                        <h2 class="heading">
+                            <span class="data-item__title">Tip Amount</span>
+                            <span class="data-item__subtitle">/ person</span>
+                        </h2>
                         <p id="tip-price" class="data-item__price">$0.00</p>
                     </div>
                     <div class="data-item">
-                        <div>
-                            <p class="data-item__title">Total</p>
-                            <p class="data-item__subtitle">/ person</p>
-                        </div>
+                        <h2 class="heading">
+                            <span class="data-item__title">Total</span>
+                            <span class="data-item__subtitle">/ person</span>
+                        </h2>
                         <p id="total-price" class="data-item__price">$0.00</p>
                     </div>
                 </div>
